@@ -8,6 +8,10 @@ public class Waypoint : MonoBehaviour
 {
     public Waypoint nextWaypoint;
     public Waypoint previousWaypoint;
+    
+    public List<Waypoint> branches;
+    [Range(0f, 1f)]
+    public float branchProbability = 0.5f;
 
     [Range(0f, 5f)]
     public float width = 1f;

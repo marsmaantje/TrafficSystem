@@ -4,9 +4,10 @@ using UnityEditor;
 using UnityEngine;
 
 [InitializeOnLoad]
+[ExecuteAlways]
 public class WaypointEditor
 {
-    [DrawGizmo(GizmoType.NotInSelectionHierarchy | GizmoType.Selected | GizmoType.Pickable)]
+    [DrawGizmo(GizmoType.NonSelected | GizmoType.Selected | GizmoType.Pickable)]
     public static void OnDrawSceneGizmo(Waypoint waypoint, GizmoType gizmoType)
     {
         //draw sphere
@@ -45,6 +46,18 @@ public class WaypointEditor
             Vector3 to = waypoint.nextWaypoint.transform.position - waypoint.nextWaypoint.transform.right * (waypoint.nextWaypoint.width / 2f);
 
             Gizmos.DrawLine(from, to);
+        }
+
+        if(waypoint.branches != null)
+        {
+            Gizmos.color = Color.blue;
+            foreach (Waypoint branch in waypoint.branches)
+            {
+                Vector3 from = waypoint.transform.position;
+                Vector3 to = branch.transform.position;
+
+                Gizmos.DrawLine(from, to);
+            }
         }
     }
 }
