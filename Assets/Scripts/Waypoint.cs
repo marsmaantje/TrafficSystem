@@ -6,39 +6,44 @@ using UnityEngine;
 [ExecuteAlways]
 public class Waypoint : MonoBehaviour
 {
-    public Waypoint nextWaypoint;
-    public Waypoint previousWaypoint;
-    
-    public List<Waypoint> branches;
-    [Range(0f, 1f)]
-    public float forwardBranchProbability = 0.5f;
-    [Range(0f, 1f)]
-    public float reverseBranchProbability = 0.5f;
 
-    public bool setReverse = false;
-    [Range(0f, 1f)]
-    public float reverseProbability = 0.5f;
+    [System.Serializable]
+    public class WaypointData
+    {
+        public Waypoint waypoint;
+        public float weight;
+    }
+    public List<WaypointData> connections;
 
     [Range(0f, 5f)]
     public float width = 1f;
 
     public Vector3 GetPosition()
     {
-        Vector3 minBound = transform.position - (transform.right * width / 2f);
-        Vector3 maxBound = transform.position + (transform.right * width / 2f);
-
-        return Vector3.Lerp(minBound, maxBound, Random.Range(0f, 1f));
+        //return random position on circle
+        float angle = Random.Range(0f, 360f);
+        float radius = Random.Range(0, width / 2f);
+        Vector3 position = new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
+        return transform.position + position;
     }
 
-    void OnDestroy()
+    public void TryAddConnection(Waypoint other, float weight = 1)
     {
-        if (nextWaypoint != null)
-        {
-            nextWaypoint.previousWaypoint = previousWaypoint;
-        }
-        if (previousWaypoint != null)
-        {
-            previousWaypoint.nextWaypoint = nextWaypoint;
-        }
+        if (other == null)
+            return;
+        if (other == this)
+            return;
+        if (connections == null)
+            connections = new List<WaypointData>();
+        if (connections.Exists(x => x.waypoint == other))
+            return;
+        connections.Add(new WaypointData() { waypoint = other, weight = weight });
+    }
+
+    public void TryRemoveConnection(Waypoint toRemove)
+    {
+        if (connections == null)
+            return;
+        connections.RemoveAll(x => x.waypoint == toRemove);
     }
 }

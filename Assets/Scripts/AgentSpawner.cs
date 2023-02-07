@@ -29,7 +29,7 @@ public class AgentSpawner : MonoBehaviour
                 GameObject agent = Instantiate(spawnData.agentPrefab, targetWaypoint.transform.position, Quaternion.identity);
                 AgentNavigator navigator = agent.GetComponent<AgentNavigator>();
                 navigator.currentWaypoint = _waypointRoot.GetChild(Random.Range(0, _waypointRoot.childCount)).GetComponent<Waypoint>();
-                navigator.reverse = Random.Range(0, 2) == 0;
+                navigator.transform.position = navigator.currentWaypoint.GetPosition();
             }
         }
     }
