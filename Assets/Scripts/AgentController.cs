@@ -16,6 +16,7 @@ namespace TrafficSystem
         public abstract void SetDestination(Vector3 direction);
         public abstract void StopMovement();
         public abstract void ResumeMovement();
+        public abstract void SetSpeed(float newSpeed);
 
     }
 }

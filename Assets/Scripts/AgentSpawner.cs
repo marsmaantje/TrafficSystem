@@ -9,6 +9,8 @@ public class AgentSpawner : MonoBehaviour
     {
         public GameObject agentPrefab;
         public int count;
+        public float minSpeed;
+        public float maxSpeed;
     }
 
     [SerializeField] List<AgentSpawnData> _spawnData;
@@ -30,6 +32,7 @@ public class AgentSpawner : MonoBehaviour
                 AgentNavigator navigator = agent.GetComponent<AgentNavigator>();
                 navigator.currentWaypoint = _waypointRoot.GetChild(Random.Range(0, _waypointRoot.childCount)).GetComponent<Waypoint>();
                 navigator.transform.position = navigator.currentWaypoint.GetPosition();
+                navigator.SetSpeed(Random.Range(spawnData.minSpeed, spawnData.maxSpeed));
             }
         }
     }

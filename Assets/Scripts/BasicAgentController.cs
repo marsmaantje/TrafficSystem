@@ -45,6 +45,11 @@ namespace TrafficSystem
             }
         }
 
+        public override void SetSpeed(float newSpeed)
+        {
+            _movementSpeed = newSpeed;
+        }
+
         public override void SetDestination(Vector3 pDestination)
         {
             _destination = pDestination;

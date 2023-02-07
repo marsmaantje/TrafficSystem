@@ -25,6 +25,8 @@ public class AgentNavigator : MonoBehaviour
     {
     }
 
+    public void SetSpeed(float newSpeed) => _controller.SetSpeed(newSpeed);
+
     public void OnDestinationReached(AgentController controller)
     {
         Waypoint nextWaypoint = getNextWaypoint();

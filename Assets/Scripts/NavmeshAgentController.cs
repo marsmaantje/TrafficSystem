@@ -37,6 +37,11 @@ namespace TrafficSystem
             }
         }
 
+        public override void SetSpeed(float newSpeed)
+        {
+            _navMeshAgent.speed = newSpeed;
+        }
+
         public override void ResumeMovement()
         {
             _navMeshAgent.Resume();
