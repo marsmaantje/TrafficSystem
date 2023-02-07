@@ -12,6 +12,7 @@ namespace TrafficSystem
         [SerializeField] protected bool _destinationReached;
         public bool IsMoving { get => _isMoving; }
         [SerializeField] protected bool _isMoving;
+        
         public abstract void SetDestination(Vector3 direction);
         public abstract void StopMovement();
         public abstract void ResumeMovement();
