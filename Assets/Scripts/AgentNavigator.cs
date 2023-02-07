@@ -44,7 +44,16 @@ public class AgentNavigator : MonoBehaviour
 
     Waypoint getNextWaypoint()
     {
-        bool willBranch = Random.Range(0f, 1f) < currentWaypoint.branchProbability;
+        if(currentWaypoint.setReverse)
+        {
+            reverse = Random.Range(0f, 1f) < currentWaypoint.reverseProbability;
+        }
+        
+        bool willBranch;
+        if(!reverse)
+            willBranch = Random.Range(0f, 1f) < currentWaypoint.forwardBranchProbability;
+        else
+            willBranch = Random.Range(0f, 1f) < currentWaypoint.reverseBranchProbability;
 
         if (willBranch && currentWaypoint.branches.Count > 0)
         {

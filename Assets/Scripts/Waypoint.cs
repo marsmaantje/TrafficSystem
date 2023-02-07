@@ -11,7 +11,13 @@ public class Waypoint : MonoBehaviour
     
     public List<Waypoint> branches;
     [Range(0f, 1f)]
-    public float branchProbability = 0.5f;
+    public float forwardBranchProbability = 0.5f;
+    [Range(0f, 1f)]
+    public float reverseBranchProbability = 0.5f;
+
+    public bool setReverse = false;
+    [Range(0f, 1f)]
+    public float reverseProbability = 0.5f;
 
     [Range(0f, 5f)]
     public float width = 1f;
