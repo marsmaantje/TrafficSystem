@@ -15,14 +15,12 @@ public class WaypointManagerWindow : EditorWindow
     }
 
     public Transform waypointRoot;
-    public bool biDirectionalConnections = false;
 
     private void OnGUI()
     {
         SerializedObject window = new SerializedObject(this);
 
         EditorGUILayout.PropertyField(window.FindProperty("waypointRoot"));
-        EditorGUILayout.PropertyField(window.FindProperty("biDirectionalConnections"));
 
 
         if(waypointRoot == null)
