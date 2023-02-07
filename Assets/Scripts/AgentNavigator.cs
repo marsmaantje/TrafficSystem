@@ -7,14 +7,13 @@ public class AgentNavigator : MonoBehaviour
 {
     [SerializeField] AgentController _controller;
     public Waypoint currentWaypoint;
-    public bool reverse = false;
-    
+
     // Start is called before the first frame update
     void Start()
     {
         if (_controller == null)
             _controller = GetComponent<AgentController>();
-        
+
         if (currentWaypoint != null)
         {
             _controller.SetDestination(currentWaypoint.GetPosition());
@@ -29,11 +28,6 @@ public class AgentNavigator : MonoBehaviour
     public void OnDestinationReached(AgentController controller)
     {
         Waypoint nextWaypoint = getNextWaypoint();
-        if (nextWaypoint == null)
-        {
-            reverse = !reverse;
-            nextWaypoint = getNextWaypoint();
-        }
 
         if (nextWaypoint != null)
         {
@@ -44,38 +38,29 @@ public class AgentNavigator : MonoBehaviour
 
     Waypoint getNextWaypoint()
     {
-        if(currentWaypoint.setReverse)
-        {
-            reverse = Random.Range(0f, 1f) < currentWaypoint.reverseProbability;
-        }
-        
-        bool willBranch;
-        if(!reverse)
-            willBranch = Random.Range(0f, 1f) < currentWaypoint.forwardBranchProbability;
-        else
-            willBranch = Random.Range(0f, 1f) < currentWaypoint.reverseBranchProbability;
+        if (currentWaypoint == null)
+            return null;
 
-        if (willBranch && currentWaypoint.branches.Count > 0)
+        if (currentWaypoint.connections == null || currentWaypoint.connections.Count == 0)
+            return null;
+        
+        float totalWeight = 0;
+        foreach (var connection in currentWaypoint.connections)
         {
-            return currentWaypoint.branches[Random.Range(0, currentWaypoint.branches.Count)];
-        } else
+            totalWeight += connection.weight;
+        }
+
+        float randomValue = Random.Range(0, totalWeight);
+        float currentWeight = 0;
+        foreach (var connection in currentWaypoint.connections)
         {
-            if (!reverse)
+            currentWeight += connection.weight;
+            if (randomValue <= currentWeight)
             {
-                if (currentWaypoint.nextWaypoint != null)
-                {
-                    return currentWaypoint.nextWaypoint;
-                }
-            }
-            else
-            {
-                if (currentWaypoint.previousWaypoint != null)
-                {
-                    return currentWaypoint.previousWaypoint;
-                }
+                return connection.waypoint;
             }
         }
-        
+
         return null;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -24,39 +25,27 @@ public class WaypointEditor
 
         Gizmos.color = Color.white;
 
-        //draw width line
+        //draw width radius circle
         float halfWidth = waypoint.width / 2f;
-        Gizmos.DrawLine(waypoint.transform.position - (waypoint.transform.right * halfWidth),
-            waypoint.transform.position + (waypoint.transform.right * halfWidth));
+        Gizmos.DrawWireSphere(waypoint.transform.position, halfWidth);
 
         //draw connection lines
-        if(waypoint.previousWaypoint != null)
+        if (waypoint.connections != null)
         {
-            Gizmos.color = Color.green;
-            Vector3 from = waypoint.transform.position + waypoint.transform.right * halfWidth;
-            Vector3 to = waypoint.previousWaypoint.transform.position + waypoint.previousWaypoint.transform.right * (waypoint.previousWaypoint.width / 2f);
-
-            Gizmos.DrawLine(from, to);
-        }
-
-        if (waypoint.nextWaypoint != null)
-        {
-            Gizmos.color = Color.red;
-            Vector3 from = waypoint.transform.position - waypoint.transform.right * halfWidth;
-            Vector3 to = waypoint.nextWaypoint.transform.position - waypoint.nextWaypoint.transform.right * (waypoint.nextWaypoint.width / 2f);
-
-            Gizmos.DrawLine(from, to);
-        }
-
-        if(waypoint.branches != null)
-        {
-            Gizmos.color = Color.blue;
-            foreach (Waypoint branch in waypoint.branches)
+            foreach (Waypoint.WaypointData connection in waypoint.connections)
             {
+                if (connection.waypoint == null)
+                    continue;
+                
+                Gizmos.color = (Color.green * connection.weight).WithAlpha(1);
                 Vector3 from = waypoint.transform.position;
-                Vector3 to = branch.transform.position;
+                Vector3 to = connection.waypoint.transform.position;
+                Quaternion direction = Quaternion.LookRotation(to - from);
+                Vector3 right = direction * Vector3.right;
+                Vector3 fromOffset = right * waypoint.width / 2f;
+                Vector3 toOffset = right * connection.waypoint.width / 2f;
 
-                Gizmos.DrawLine(from, to);
+                Gizmos.DrawLine(from + fromOffset, to + toOffset);
             }
         }
     }
