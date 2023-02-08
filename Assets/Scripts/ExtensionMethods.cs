@@ -17,7 +17,7 @@ public static class ExtensionMethods
         {
             distance += Vector3.Distance(navMeshAgent.path.corners[i], navMeshAgent.path.corners[i + 1]);
         }
-
+        
         return distance;
     }
 }
