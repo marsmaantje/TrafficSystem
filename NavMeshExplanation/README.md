@@ -12,13 +12,13 @@ To generate the NavMesh you need to do the following steps:<br>
 1. Mark all gameobjects that you want to be part of the navmesh (ground and walls) as `Navigation Static`, this tells the mesh generator to use these in the generation of the NavMesh.
 <img src="https://raw.githubusercontent.com/marsmaantje/TrafficSystem/main/readmeImages/MarkNavigationStatic.png" alt="MarkNavigationStatic.png" width=50%>
 
-1. Open the `Navigation` window. It can be found under `Window->AI>Navigation`<br>
+2. Open the `Navigation` window. It can be found under `Window->AI>Navigation`<br>
 <img src="https://raw.githubusercontent.com/marsmaantje/TrafficSystem/main/readmeImages/NavigationInspectorLocation.png" alt="NavigationInspectorLocation.png" width=50%>
 
-1. While in the `Object` tab, you can select one or more meshrenderes in the scene and change how the generator should handle them.<br>
+3. While in the `Object` tab, you can select one or more meshrenderes in the scene and change how the generator should handle them.<br>
 <img src="https://raw.githubusercontent.com/marsmaantje/TrafficSystem/main/readmeImages/NavigationInspectorObject.png" alt="NavigationInspectorObject.png" width=50%>
 
-1. Finally, over in the `bake` tab, you can specify the settings for baking, and finally bake the NavMesh.<br>
+4. Finally, over in the `bake` tab, you can specify the settings for baking, and finally bake the NavMesh.<br>
 <img src="https://raw.githubusercontent.com/marsmaantje/TrafficSystem/main/readmeImages/NavigationInspectorBake.png" alt="NavigationInspectorBake.png" width=50%><br>
 This will create a new folder in the same folder your current scene is in with the same name and place the baked NavMesh asset in there.<br>
 <img src="https://raw.githubusercontent.com/marsmaantje/TrafficSystem/main/readmeImages/NavigationInspectorBakeFolder.png" alt="NavigationInspectorBakeFolder.png" width=50%><br>
