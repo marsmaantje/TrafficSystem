@@ -9,7 +9,7 @@ The system consists of two parts, the NavMesh and the Agent.
 The NavMesh is the static part of the system, this is the surface agents walk over and the object that determines what surfaces are walkable and which ones are not.<br>
 To generate the NavMesh you need to do the following steps:<br>
 
-1. Mark all gameobjects that you want to be part of the navmesh (ground and walls) as `Navigation Static`, this tells the mesh generator to use these in the generation of the NavMesh.
+1. Mark all gameobjects that you want to be part of the navmesh (ground and walls) as `Navigation Static`, this tells the mesh generator to use these in the generation of the NavMesh.<br>
 <img src="https://raw.githubusercontent.com/marsmaantje/TrafficSystem/main/readmeImages/MarkNavigationStatic.png" alt="MarkNavigationStatic.png" width=50%><br>
 
 2. Open the `Navigation` window. It can be found under `Window->AI>Navigation`<br>
