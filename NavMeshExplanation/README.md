@@ -32,7 +32,7 @@ With this method you tell the Agent what position in world transform it should t
 <img src="https://raw.githubusercontent.com/marsmaantje/TrafficSystem/main/readmeImages/NavMeshAgentSetDestination.png" alt="NavMeshAgentSetDestination.png" width=50%><br>
 To then check whether the Agent has reached the target, you can check the `NavMeshAgent.RemainingDistance` field, this returns how many units the agent still has to go untill its target.<br>
 
-> **Warning**
+> **Warning**<br>
 > The `RemainingDistance` returns infinity if the agent still has to go around a corner. To fix this, you could use this  extension method instead to check the remaining distance:<br>
 > ```cs
 > using UnityEngine;
