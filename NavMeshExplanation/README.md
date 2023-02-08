@@ -31,27 +31,29 @@ To get the agent to move to a location, you need to reference it in a script and
 With this method you tell the Agent what position in world transform it should try to go towards, it will go towards the nearest point on the NavMesh.<br>
 <img src="https://raw.githubusercontent.com/marsmaantje/TrafficSystem/main/readmeImages/NavMeshAgentSetDestination.png" alt="NavMeshAgentSetDestination.png" width=50%><br>
 To then check whether the Agent has reached the target, you can check the `NavMeshAgent.RemainingDistance` field, this returns how many units the agent still has to go untill its target.<br>
-<b>Note:</b> the `RemainingDistance` returns infinity if the agent still has to go around a corner. To fix this, you could use this extension method instead to check the remaining distance:<br>
-```cs
-using UnityEngine;
-using UnityEngine.AI;
 
-public static class ExtensionMethods
-{
-    public static float GetPathRemainingDistance(this NavMeshAgent navMeshAgent)
-    {
-        if (navMeshAgent.pathPending ||
-            navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid ||
-            navMeshAgent.path.corners.Length == 0)
-            return -1f;
-
-        float distance = 0.0f;
-        for (int i = 0; i < navMeshAgent.path.corners.Length - 1; ++i)
-        {
-            distance += Vector3.Distance(navMeshAgent.path.corners[i], navMeshAgent.path.corners[i + 1]);
-        }
-        
-        return distance;
-    }
-}
-```
+> **Warning**
+> The `RemainingDistance` returns infinity if the agent still has to go around a corner. To fix this, you could use this  extension method instead to check the remaining distance:<br>
+> ```cs
+> using UnityEngine;
+> using UnityEngine.AI;
+> 
+> public static class ExtensionMethods
+> {
+>     public static float GetPathRemainingDistance(this NavMeshAgent navMeshAgent)
+>     {
+>         if (navMeshAgent.pathPending ||
+>             navMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid ||
+>             navMeshAgent.path.corners.Length == 0)
+>             return -1f;
+> 
+>         float distance = 0.0f;
+>         for (int i = 0; i < navMeshAgent.path.corners.Length - 1; ++i)
+>         {
+>             distance += Vector3.Distance(navMeshAgent.path.corners[i], navMeshAgent.path.corners[i + 1]);
+>         }
+>         
+>         return distance;
+>     }
+> }
+> ```
