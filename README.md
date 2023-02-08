@@ -3,7 +3,7 @@ A simple traffic system in unity
 
 The traffic system works with waypoints, each waypoint has a position, radius and a list of connections to other waypoints.
 <br>
-[![Watch the video](https://img.youtu.be/UB1so-lLNPQ/maxresdefault.jpg)](https://youtu.be/UB1so-lLNPQ)
+[![Watch the video](https://img.youtube.com/vi/UB1so-lLNPQ/maxresdefault.jpg)](https://youtu.be/UB1so-lLNPQ)
 <br><br>
 
 ### <b>Waypoints</b>
